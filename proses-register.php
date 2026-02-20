@@ -22,6 +22,3 @@ if (mysqli_query($koneksi, $sql)) {
 } else {
     echo "Gagal: " . mysqli_error($koneksi);
 }
-
-
-?>
