@@ -17,27 +17,27 @@
         exit;
     }
 
-    include 'config/koneksi.php';
+    include '../config/koneksi.php';
 
     $user_id = $_SESSION['user_id'];
-    
+
     $query = mysqli_query(
         $koneksi,
-        "SELECT p.*, k.nama_kategori FROM pengaduan p 
+        "SELECT p.*, k.nama_kategori, u.nis FROM pengaduan p 
+         LEFT JOIN users u ON p.user_id = u.id
          LEFT JOIN kategori k ON p.kategori_id = k.id 
-         WHERE p.user_id = '$user_id' 
          ORDER BY p.tanggal_lapor DESC"
     );
-    
+
     if (!$query) {
         die("Query Error: " . mysqli_error($koneksi));
     }
-    
+
     $pengaduan_list = [];
     while ($row = mysqli_fetch_assoc($query)) {
         $pengaduan_list[] = $row;
     }
-    
+
     $total_pengaduan = count($pengaduan_list);
     ?>
 </head>
@@ -47,7 +47,7 @@
     <div class="flex min-h-screen">
 
         <!-- ================= SIDEBAR ================= -->
-        <?php include 'partial/sidebar.php'; ?>
+        <?php include '../partial/sidebar.php'; ?>
         <!-- =========================================== -->
 
         <!-- ================= CONTENT ================= -->
@@ -63,6 +63,7 @@
                     <thead class="bg-[#42506a] text-white">
                         <tr>
                             <th class="px-6 py-3">ID</th>
+                            <th class="px-6 py-3">NIS</th>
                             <th class="px-6 py-3">Judul</th>
                             <th class="px-6 py-3">Deskripsi</th>
                             <th class="px-6 py-3">Lokasi</th>
@@ -81,6 +82,9 @@
                                     <td class="px-6 py-4">
                                         <?= htmlspecialchars($data["id"]) ?>
                                     </td>
+                                    <td>
+                                        <?= htmlspecialchars($data["nis"]) ?>
+                                    </td>
 
                                     <td class="px-6 py-4 font-semibold">
                                         <?= htmlspecialchars($data["judul"]) ?>
@@ -94,7 +98,7 @@
                                         <?= htmlspecialchars($data["lokasi"]) ?>
                                     </td>
                                     <td>
-                                       <?= date('d M Y', strtotime($data['tanggal_lapor'])) ?> 
+                                        <?= date('d M Y', strtotime($data['tanggal_lapor'])) ?>
                                     </td>
 
                                     <td class="px-6 py-4">

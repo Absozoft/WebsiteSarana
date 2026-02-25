@@ -18,7 +18,12 @@
         </h2>
 
         <form action="proses-login.php" method="POST" class="space-y-5">
-
+                    <?php if (isset($_GET['pesan'])): ?>
+                        <div class="bg-red-100 text-red-700 p-3 rounded">
+                            <?= htmlspecialchars($_GET['pesan']) ?>
+                        </div>
+                        <?php unset($_GET['pesan']); ?>
+                    <?php endif; ?>
             <div>
                 <label class="block text-sm font-medium text-[#42506a] mb-1">
                     Username / NIS

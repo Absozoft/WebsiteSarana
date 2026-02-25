@@ -32,7 +32,7 @@ if (isset($_POST['login'])) {
             $_SESSION['role'] = $data['role'];
             //Mengecek apakah role admin/siswa
             if ($data['role'] == 'admin') {
-                header("location:admin/data-pengaduan.php");
+                header("location:admin/data-pengaduan-admin.php");
             } elseif ($data['role'] == 'siswa') {
                 header("location:./data-pengaduan.php");
             }

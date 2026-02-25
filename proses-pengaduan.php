@@ -13,6 +13,11 @@ $kategori = $_POST['kategori'];
 include 'config/koneksi.php';
 $sql = "INSERT INTO pengaduan (`user_id`, `kategori_id`,`judul`, `deskripsi`, `lokasi`, `foto`) VALUES ('$user_id', '$kategori', '$judul', '$deskripsi', '$lokasi', '$foto')";
 
+if (empty($judul) || empty($deskripsi) || empty($lokasi) || empty($foto) || empty($kategori)) {
+    header("Location: input-aspirasi.php?pesan=Data tidak boleh kosong!");
+    exit;
+}
+
 if (mysqli_query($koneksi, $sql)) {
     echo "Data berhasil disimpan";
     header("location:data-pengaduan.php");
@@ -20,6 +25,8 @@ if (mysqli_query($koneksi, $sql)) {
     echo "Gagal: " . mysqli_error($koneksi);
     header("location:input-aspirasi.php");
 }
+
+
 
 
 ?>
