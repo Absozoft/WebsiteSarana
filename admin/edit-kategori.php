@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
-    <title>SiFast - Tambah Kategori</title>
+    <title>SiFast - Edit Kategori</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <?php
     include 'middleware.php';
+    include '../config/koneksi.php';
+
+    // Ambil ID dari URL
+    if (!isset($_GET['id']) || empty($_GET['id'])) {
+        header("Location: kategori.php?pesan=ID tidak valid&status=gagal");
+        exit();
+    }
+
+    $id = $_GET['id'];
+
+    // Ambil data kategori berdasarkan ID
+    $query = mysqli_query($koneksi, "SELECT * FROM kategori WHERE id='$id'");
+    $data = mysqli_fetch_assoc($query);
+
+    if (!$data) {
+        header("Location: kategori.php?pesan=Kategori tidak ditemukan&status=gagal");
+        exit();
+    }
     ?>
 </head>
+
 <body class="bg-[#0b1110]">
 
     <div class="flex min-h-screen">
@@ -26,9 +46,9 @@
             <!-- Header -->
             <div class="mb-8">
                 <h2 class="text-3xl font-bold mb-2">
-                    <i class="fa-solid fa-plus-circle mr-2"></i>Tambah Kategori Baru
+                    <i class="fa-solid fa-pen-to-square mr-2"></i>Edit Kategori
                 </h2>
-                <p class="text-gray-400">Buat kategori baru untuk laporan pengaduan</p>
+                <p class="text-gray-400">Ubah informasi kategori laporan</p>
             </div>
 
             <!-- Form Card -->
@@ -38,13 +58,16 @@
                 <div class="bg-[#42506a] px-8 py-6">
                     <h3 class="text-xl font-bold text-white flex items-center gap-3">
                         <i class="fa-solid fa-tag"></i>
-                        Form Tambah Kategori
+                        Form Edit Kategori
                     </h3>
                 </div>
 
                 <!-- Form -->
-                <form action="proses-kategori.php" method="POST" class="p-8 space-y-6">
+                <form action="proses-edit-kategori.php" method="POST" class="p-8 space-y-6">
                     
+                    <!-- Hidden ID -->
+                    <input type="hidden" name="id" value="<?= htmlspecialchars($data['id']) ?>">
+
                     <?php if (isset($_GET['pesan'])): ?>
                         <div class="p-4 rounded-lg <?= isset($_GET['status']) && $_GET['status'] == 'sukses' ? 'bg-green-100 border border-green-400 text-green-700' : 'bg-red-100 border border-red-400 text-red-700' ?>">
                             <div class="flex items-center gap-2">
@@ -63,6 +86,7 @@
                         <input 
                             type="text" 
                             name="nama_kategori" 
+                            value="<?= htmlspecialchars($data['nama_kategori']) ?>"
                             placeholder="Contoh: Fasilitas, Keamanan, Kebersihan" 
                             class="w-full px-4 py-3 rounded-lg border-2 border-[#a4c6c3] 
                                    focus:outline-none focus:border-[#42506a] text-[#0b1110]
@@ -85,7 +109,7 @@
                                    focus:outline-none focus:border-[#42506a] text-[#0b1110]
                                    transition-colors resize-none"
                             required
-                        ></textarea>
+                        ><?= htmlspecialchars($data['deskripsi']) ?></textarea>
                     </div>
 
                     <!-- Buttons -->
@@ -96,8 +120,8 @@
                                    hover:bg-[#8086b0] transition duration-300 shadow-lg 
                                    font-semibold flex items-center justify-center gap-2"
                         >
-                            <i class="fa-solid fa-paper-plane"></i>
-                            <span>Tambah Kategori</span>
+                            <i class="fa-solid fa-save"></i>
+                            <span>Simpan Perubahan</span>
                         </button>
                         <a 
                             href="kategori.php"
@@ -120,4 +144,5 @@
     </div>
 
 </body>
+
 </html>

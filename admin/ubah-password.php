@@ -3,29 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SiFast - Ubah Password</title>
+    <title>SiFast - Ubah Password Admin</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <?php
-    session_start();
-
-    // Middleware: Cek apakah user sudah login
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: login.php");
-        exit();
-    }
-
-    // Middleware: Cek apakah user adalah siswa
-    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'siswa') {
-        // Jika bukan siswa, arahkan ke halaman lain
-        header("Location: data-pengaduan.php");
-        exit();
-    }
-
-    include 'config/koneksi.php';
-
+    // Middleware untuk admin
+    include 'middleware.php';
+    include '../config/koneksi.php';
     ?>
 </head>
 <body class="bg-[#0b1110]">
@@ -33,7 +19,7 @@
     <div class="flex min-h-screen">
 
         <!-- ================= SIDEBAR ================= -->
-        <?php include 'partial/sidebar.php'; ?>
+        <?php include '../partial/sidebar.php'; ?>
         <!-- =========================================== -->
 
         <!-- ================= CONTENT ================= -->
@@ -42,9 +28,9 @@
             <!-- Header -->
             <div class="mb-8">
                 <h2 class="text-3xl font-bold mb-2">
-                    <i class="fa-solid fa-key mr-2"></i>Ubah Password
+                    <i class="fa-solid fa-key mr-2"></i>Ubah Password Admin
                 </h2>
-                <p class="text-gray-400">Ubah password akun Anda untuk keamanan yang lebih baik</p>
+                <p class="text-gray-400">Ubah password akun admin Anda untuk keamanan yang lebih baik</p>
             </div>
 
             <!-- Form Card -->
@@ -53,8 +39,8 @@
                 <!-- Header Card -->
                 <div class="bg-[#42506a] px-8 py-6">
                     <h3 class="text-xl font-bold text-white flex items-center gap-3">
-                        <i class="fa-solid fa-lock"></i>
-                        Form Ubah Password
+                        <i class="fa-solid fa-user-shield"></i>
+                        Form Ubah Password Admin
                     </h3>
                 </div>
 
@@ -158,12 +144,13 @@
                     <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
                         <h4 class="font-semibold text-blue-800 mb-2 flex items-center gap-2">
                             <i class="fa-solid fa-shield-halved"></i>
-                            Tips Keamanan Password:
+                            Tips Keamanan Password Admin:
                         </h4>
                         <ul class="text-sm text-blue-700 space-y-1 ml-6">
                             <li class="list-disc">Gunakan kombinasi huruf besar, kecil, angka, dan simbol</li>
                             <li class="list-disc">Jangan gunakan informasi pribadi yang mudah ditebak</li>
-                            <li class="list-disc">Ubah password secara berkala</li>
+                            <li class="list-disc">Ubah password secara berkala untuk keamanan maksimal</li>
+                            <li class="list-disc">Jangan bagikan password kepada siapapun</li>
                         </ul>
                     </div>
 
@@ -179,7 +166,7 @@
                             <span>Simpan Password Baru</span>
                         </button>
                         <a 
-                            href="data-pengaduan.php"
+                            href="data-pengaduan-admin.php"
                             class="px-6 py-3 bg-gray-500 text-white rounded-lg 
                                    hover:bg-gray-600 transition duration-300 shadow-lg 
                                    font-semibold flex items-center justify-center gap-2"

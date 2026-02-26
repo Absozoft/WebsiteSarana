@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <?php
+    include '../config/koneksi.php';
+    include 'middleware.php';
+    ?>
 </head>
 <body>
     <form action="proses-register.php" method="POST">

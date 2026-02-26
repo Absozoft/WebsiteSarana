@@ -1,19 +1,7 @@
 <?php 
-session_start();
-
-// Cek apakah user sudah login
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
-
-// Cek apakah user adalah siswa
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'siswa') {
-    header("Location: data-pengaduan.php");
-    exit();
-}
-
-include 'config/koneksi.php';
+// Middleware untuk admin
+include 'middleware.php';
+include '../config/koneksi.php';
 
 $user_id = $_SESSION['user_id'];
 $password_lama = $_POST['password_lama'];

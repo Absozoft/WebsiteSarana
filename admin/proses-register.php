@@ -1,4 +1,5 @@
 <?php
+include 'middleware.php';
 //Ambil Data
 $nama_lengkap = $_POST['nama_lengkap'];
 $nis = $_POST['nis'];
