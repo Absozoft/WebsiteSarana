@@ -34,6 +34,21 @@
     if (!$data) {
         die("Pengaduan dengan ID $id tidak ditemukan!");
     }
+
+    // Ambil feedback yang ada
+    $query_feedback = mysqli_query(
+        $koneksi,
+        "SELECT * FROM feedback WHERE pengaduan_id = '$id' ORDER BY tanggal_feedback DESC"
+    );
+
+    if (!$query_feedback) {
+        die("Query error: " . mysqli_error($koneksi));
+    }
+
+    $feedback_list = [];
+    while ($row = mysqli_fetch_assoc($query_feedback)) {
+        $feedback_list[] = $row;
+    }
     ?>
 </head>
 
@@ -130,6 +145,56 @@
                     <div class="prose max-w-none">
                         <p class="text-gray-700 leading-relaxed whitespace-pre-wrap"><?= htmlspecialchars($data['deskripsi']) ?></p>
                     </div>
+                </div>
+
+                <!-- Status Section -->
+                <div class="mt-8 bg-white p-6 rounded-lg border border-[#a4c6c3] shadow-sm">
+                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-gray-200">
+                        <i class="fa-solid fa-circle-info text-[#42506a] text-lg"></i>
+                        <h4 class="text-lg font-bold text-[#0b1110] uppercase tracking-wide">Status Pengaduan</h4>
+                    </div>
+                    <div class="mb-4">
+                        <?php
+                        $status_colors = [
+                            'pending' => 'bg-yellow-100 text-yellow-800',
+                            'proses' => 'bg-blue-100 text-blue-800',
+                            'selesai' => 'bg-green-100 text-green-800',
+                            'ditolak' => 'bg-red-100 text-red-800'
+                        ];
+                        $status_class = $status_colors[$data['status']] ?? 'bg-gray-100 text-gray-800';
+                        ?>
+                        <span class="inline-block px-4 py-2 rounded-full text-sm font-bold <?= $status_class ?>">
+                            <?= ucfirst(htmlspecialchars($data['status'])) ?>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Feedback Section -->
+                <div class="mt-8 bg-white p-6 rounded-lg border border-[#a4c6c3] shadow-sm">
+                    <div class="flex items-center gap-3 mb-6 pb-3 border-b border-gray-200">
+                        <i class="fa-solid fa-comments text-[#42506a] text-lg"></i>
+                        <h4 class="text-lg font-bold text-[#0b1110] uppercase tracking-wide">Feedback dari Admin</h4>
+                    </div>
+
+                    <?php if (!empty($feedback_list)): ?>
+                        <div class="space-y-4">
+                            <?php foreach ($feedback_list as $fb): ?>
+                                <div class="bg-[#f5f5f5] p-4 rounded-lg border-l-4 border-[#42506a]">
+                                    <p class="text-gray-700 text-sm leading-relaxed"><?= nl2br(htmlspecialchars($fb['pesan'])) ?></p>
+                                    <p class="text-gray-500 text-xs mt-2">
+                                        <i class="fa-solid fa-clock mr-1"></i>
+                                        <?= date('d F Y H:i', strtotime($fb['tanggal_feedback'])) ?>
+                                    </p>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="bg-[#f5f5f5] p-4 rounded-lg border-l-4 border-gray-300">
+                            <p class="text-gray-500 text-sm">
+                                <i class="fa-solid fa-circle-info mr-2"></i>Belum ada feedback dari admin
+                            </p>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
             </div>

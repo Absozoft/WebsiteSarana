@@ -46,6 +46,8 @@ $delete_query = mysqli_query($koneksi, "DELETE FROM users WHERE id = '$id'");
 if ($delete_query) {
     header("Location: daftar-akun.php?success=Akun '$username' berhasil dihapus");
     exit();
+
+    
 } else {
     header("Location: daftar-akun.php?error=Gagal menghapus akun: " . mysqli_error($koneksi));
     exit();

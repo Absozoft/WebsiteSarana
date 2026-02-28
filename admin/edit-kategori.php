@@ -41,35 +41,35 @@
         <!-- =========================================== -->
 
         <!-- ================= CONTENT ================= -->
-        <div class="flex-1 p-10 text-white">
+        <div class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 text-white">
 
             <!-- Header -->
-            <div class="mb-8">
-                <h2 class="text-3xl font-bold mb-2">
+            <div class="mb-6 sm:mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-2">
                     <i class="fa-solid fa-pen-to-square mr-2"></i>Edit Kategori
                 </h2>
-                <p class="text-gray-400">Ubah informasi kategori laporan</p>
+                <p class="text-gray-400 text-sm sm:text-base">Ubah informasi kategori laporan</p>
             </div>
 
             <!-- Form Card -->
-            <div class="bg-[#ebf3f2] rounded-2xl shadow-2xl overflow-hidden max-w-3xl">
+            <div class="bg-[#ebf3f2] rounded-lg sm:rounded-2xl shadow-2xl overflow-hidden max-w-2xl mx-auto">
                 
                 <!-- Header Card -->
-                <div class="bg-[#42506a] px-8 py-6">
-                    <h3 class="text-xl font-bold text-white flex items-center gap-3">
+                <div class="bg-[#42506a] px-4 sm:px-6 md:px-8 py-4 sm:py-6">
+                    <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2 sm:gap-3">
                         <i class="fa-solid fa-tag"></i>
-                        Form Edit Kategori
+                        <span>Form Edit Kategori</span>
                     </h3>
                 </div>
 
                 <!-- Form -->
-                <form action="proses-edit-kategori.php" method="POST" class="p-8 space-y-6">
+                <form action="proses-edit-kategori.php" method="POST" class="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
                     
                     <!-- Hidden ID -->
                     <input type="hidden" name="id" value="<?= htmlspecialchars($data['id']) ?>">
 
                     <?php if (isset($_GET['pesan'])): ?>
-                        <div class="p-4 rounded-lg <?= isset($_GET['status']) && $_GET['status'] == 'sukses' ? 'bg-green-100 border border-green-400 text-green-700' : 'bg-red-100 border border-red-400 text-red-700' ?>">
+                        <div class="p-3 sm:p-4 rounded-lg text-sm sm:text-base <?= isset($_GET['status']) && $_GET['status'] == 'sukses' ? 'bg-green-100 border border-green-400 text-green-700' : 'bg-red-100 border border-red-400 text-red-700' ?>">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid <?= isset($_GET['status']) && $_GET['status'] == 'sukses' ? 'fa-circle-check' : 'fa-circle-xmark' ?>"></i>
                                 <span><?= htmlspecialchars($_GET['pesan']) ?></span>
@@ -79,16 +79,16 @@
 
                     <!-- Nama Kategori -->
                     <div>
-                        <label class="flex items-center gap-2 text-[#0b1110] font-semibold mb-2">
-                            <i class="fa-solid fa-tag text-[#42506a]"></i>
-                            Nama Kategori <span class="text-red-500">*</span>
+                        <label class="flex items-center gap-2 text-[#0b1110] font-semibold mb-2 text-sm sm:text-base">
+                            <i class="fa-solid fa-tag text-[#42506a] flex-shrink-0"></i>
+                            <span>Nama Kategori <span class="text-red-500">*</span></span>
                         </label>
                         <input 
                             type="text" 
                             name="nama_kategori" 
                             value="<?= htmlspecialchars($data['nama_kategori']) ?>"
                             placeholder="Contoh: Fasilitas, Keamanan, Kebersihan" 
-                            class="w-full px-4 py-3 rounded-lg border-2 border-[#a4c6c3] 
+                            class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 border-[#a4c6c3] text-sm
                                    focus:outline-none focus:border-[#42506a] text-[#0b1110]
                                    transition-colors"
                             required
@@ -97,15 +97,15 @@
 
                     <!-- Deskripsi -->
                     <div>
-                        <label class="flex items-center gap-2 text-[#0b1110] font-semibold mb-2">
-                            <i class="fa-solid fa-align-left text-[#42506a]"></i>
-                            Deskripsi <span class="text-red-500">*</span>
+                        <label class="flex items-center gap-2 text-[#0b1110] font-semibold mb-2 text-sm sm:text-base">
+                            <i class="fa-solid fa-align-left text-[#42506a] flex-shrink-0"></i>
+                            <span>Deskripsi <span class="text-red-500">*</span></span>
                         </label>
                         <textarea 
                             name="deskripsi" 
                             rows="4"
                             placeholder="Jelaskan kategori ini untuk apa..."
-                            class="w-full px-4 py-3 rounded-lg border-2 border-[#a4c6c3] 
+                            class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 border-[#a4c6c3] text-sm
                                    focus:outline-none focus:border-[#42506a] text-[#0b1110]
                                    transition-colors resize-none"
                             required
@@ -113,10 +113,10 @@
                     </div>
 
                     <!-- Buttons -->
-                    <div class="flex gap-3 pt-4">
+                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2 sm:pt-4">
                         <button 
                             type="submit"
-                            class="flex-1 px-6 py-3 bg-[#42506a] text-white rounded-lg 
+                            class="flex-1 px-4 sm:px-6 py-2 sm:py-3 bg-[#42506a] text-white rounded-lg text-sm sm:text-base
                                    hover:bg-[#8086b0] transition duration-300 shadow-lg 
                                    font-semibold flex items-center justify-center gap-2"
                         >
@@ -125,7 +125,7 @@
                         </button>
                         <a 
                             href="kategori.php"
-                            class="px-6 py-3 bg-gray-500 text-white rounded-lg 
+                            class="flex-1 px-4 sm:px-6 py-2 sm:py-3 bg-gray-500 text-white rounded-lg text-sm sm:text-base
                                    hover:bg-gray-600 transition duration-300 shadow-lg 
                                    font-semibold flex items-center justify-center gap-2"
                         >

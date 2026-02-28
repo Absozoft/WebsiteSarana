@@ -19,7 +19,8 @@ if (!$koneksi) {
 $sql = "INSERT INTO users (nama_lengkap, nis, kelas, username, password, email, role) VALUES ('$nama_lengkap', '$nis', '$kelas', '$username', '$password', '$email', 'siswa')";
 
 if (mysqli_query($koneksi, $sql)) {
-    echo "Data berhasil disimpan";
+    header("Location: daftar-akun.php?success=Registrasi berhasil! Akun telah dibuat.");
+    exit();
 } else {
     echo "Gagal: " . mysqli_error($koneksi);
 }
