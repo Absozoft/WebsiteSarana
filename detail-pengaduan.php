@@ -60,63 +60,63 @@
     <?php include 'partial/sidebar.php'; ?>
 
     <!-- Content -->
-    <div class="flex-1 p-10 text-white">
+    <div class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 text-white">
 
         <!-- Header -->
-        <div class="mb-8">
-            <h2 class="text-3xl font-bold mb-2">
+        <div class="mb-6 sm:mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-2">
                 <i class="fa-solid fa-file-lines mr-2"></i>Detail Pengaduan
             </h2>
-            <p class="text-gray-400">Informasi lengkap mengenai laporan pengaduan</p>
+            <p class="text-gray-400 text-sm sm:text-base">Informasi lengkap mengenai laporan pengaduan</p>
         </div>
 
         <!-- Card Container -->
-        <div class="bg-[#ebf3f2] text-[#0b1110] rounded-2xl shadow-2xl overflow-hidden">
+        <div class="bg-[#ebf3f2] text-[#0b1110] rounded-lg sm:rounded-2xl shadow-2xl overflow-hidden">
             
             <!-- Header Card -->
-            <div class="bg-[#42506a] px-8 py-6">
-                <h3 class="text-2xl font-bold text-white flex items-center gap-3">
+            <div class="bg-[#42506a] px-4 sm:px-6 md:px-8 py-4 sm:py-6">
+                <h3 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2 sm:gap-3 break-words">
                     <i class="fa-solid fa-bullhorn"></i>
                     <?= htmlspecialchars($data['judul']) ?>
                 </h3>
             </div>
 
             <!-- Content Card -->
-            <div class="p-8">
+            <div class="p-4 sm:p-6 md:p-8">
                 
                 <!-- Grid Layout -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
                     
                     <!-- ID Pengaduan -->
-                    <div class="bg-white p-5 rounded-lg border-l-4 border-[#42506a] shadow-sm">
-                        <div class="flex items-center gap-3 mb-2">
-                            <i class="fa-solid fa-hashtag text-[#42506a] text-lg"></i>
-                            <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">ID Pengaduan</p>
+                    <div class="bg-white p-3 sm:p-5 rounded-lg border-l-4 border-[#42506a] shadow-sm">
+                        <div class="flex items-center gap-2 sm:gap-3 mb-2">
+                            <i class="fa-solid fa-hashtag text-[#42506a] text-base sm:text-lg"></i>
+                            <p class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">ID Pengaduan</p>
                         </div>
-                        <p class="text-xl font-bold text-[#0b1110] ml-8">
+                        <p class="text-lg sm:text-xl font-bold text-[#0b1110] ml-6 sm:ml-8">
                             #<?= htmlspecialchars($data['id']) ?>
                         </p>
                     </div>
 
                     <!-- Tanggal Lapor -->
-                    <div class="bg-white p-5 rounded-lg border-l-4 border-[#8086b0] shadow-sm">
-                        <div class="flex items-center gap-3 mb-2">
-                            <i class="fa-solid fa-calendar-days text-[#8086b0] text-lg"></i>
-                            <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Tanggal Lapor</p>
+                    <div class="bg-white p-3 sm:p-5 rounded-lg border-l-4 border-[#8086b0] shadow-sm">
+                        <div class="flex items-center gap-2 sm:gap-3 mb-2">
+                            <i class="fa-solid fa-calendar-days text-[#8086b0] text-base sm:text-lg"></i>
+                            <p class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Tanggal Lapor</p>
                         </div>
-                        <p class="text-xl font-bold text-[#0b1110] ml-8">
+                        <p class="text-lg sm:text-xl font-bold text-[#0b1110] ml-6 sm:ml-8">
                             <?= date('d F Y', strtotime($data['tanggal_lapor'])) ?>
                         </p>
                     </div>
 
                     <!-- Kategori -->
-                    <div class="bg-white p-5 rounded-lg border-l-4 border-[#a4c6c3] shadow-sm">
-                        <div class="flex items-center gap-3 mb-2">
-                            <i class="fa-solid fa-tag text-[#a4c6c3] text-lg"></i>
-                            <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Kategori</p>
+                    <div class="bg-white p-3 sm:p-5 rounded-lg border-l-4 border-[#a4c6c3] shadow-sm">
+                        <div class="flex items-center gap-2 sm:gap-3 mb-2">
+                            <i class="fa-solid fa-tag text-[#a4c6c3] text-base sm:text-lg"></i>
+                            <p class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Kategori</p>
                         </div>
-                        <div class="ml-8">
-                            <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#42506a] text-white rounded-full text-sm font-semibold">
+                        <div class="ml-6 sm:ml-8">
+                            <span class="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-2 bg-[#42506a] text-white rounded-full text-xs sm:text-sm font-semibold">
                                 <i class="fa-solid fa-tags"></i>
                                 <?= !empty($data['nama_kategori']) ? htmlspecialchars($data['nama_kategori']) : 'Tidak ada kategori' ?>
                             </span>
@@ -124,12 +124,12 @@
                     </div>
 
                     <!-- Lokasi -->
-                    <div class="bg-white p-5 rounded-lg border-l-4 border-red-400 shadow-sm">
-                        <div class="flex items-center gap-3 mb-2">
-                            <i class="fa-solid fa-location-dot text-red-400 text-lg"></i>
-                            <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Lokasi Kejadian</p>
+                    <div class="bg-white p-3 sm:p-5 rounded-lg border-l-4 border-red-400 shadow-sm">
+                        <div class="flex items-center gap-2 sm:gap-3 mb-2">
+                            <i class="fa-solid fa-location-dot text-red-400 text-base sm:text-lg"></i>
+                            <p class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Lokasi Kejadian</p>
                         </div>
-                        <p class="text-lg font-semibold text-[#0b1110] ml-8">
+                        <p class="text-base sm:text-lg font-semibold text-[#0b1110] ml-6 sm:ml-8">
                             <?= htmlspecialchars($data['lokasi']) ?>
                         </p>
                     </div>
@@ -137,21 +137,21 @@
                 </div>
 
                 <!-- Deskripsi Section -->
-                <div class="bg-white p-6 rounded-lg border border-[#a4c6c3] shadow-sm">
-                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-gray-200">
-                        <i class="fa-solid fa-align-left text-[#42506a] text-lg"></i>
-                        <h4 class="text-lg font-bold text-[#0b1110] uppercase tracking-wide">Deskripsi Lengkap</h4>
+                <div class="bg-white p-4 sm:p-6 rounded-lg border border-[#a4c6c3] shadow-sm">
+                    <div class="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-gray-200">
+                        <i class="fa-solid fa-align-left text-[#42506a] text-base sm:text-lg"></i>
+                        <h4 class="text-base sm:text-lg font-bold text-[#0b1110] uppercase tracking-wide">Deskripsi Lengkap</h4>
                     </div>
                     <div class="prose max-w-none">
-                        <p class="text-gray-700 leading-relaxed whitespace-pre-wrap"><?= htmlspecialchars($data['deskripsi']) ?></p>
+                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed whitespace-pre-wrap"><?= htmlspecialchars($data['deskripsi']) ?></p>
                     </div>
                 </div>
 
                 <!-- Status Section -->
-                <div class="mt-8 bg-white p-6 rounded-lg border border-[#a4c6c3] shadow-sm">
-                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-gray-200">
-                        <i class="fa-solid fa-circle-info text-[#42506a] text-lg"></i>
-                        <h4 class="text-lg font-bold text-[#0b1110] uppercase tracking-wide">Status Pengaduan</h4>
+                <div class="mt-6 sm:mt-8 bg-white p-4 sm:p-6 rounded-lg border border-[#a4c6c3] shadow-sm">
+                    <div class="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-gray-200">
+                        <i class="fa-solid fa-circle-info text-[#42506a] text-base sm:text-lg"></i>
+                        <h4 class="text-base sm:text-lg font-bold text-[#0b1110] uppercase tracking-wide">Status Pengaduan</h4>
                     </div>
                     <div class="mb-4">
                         <?php
@@ -163,23 +163,23 @@
                         ];
                         $status_class = $status_colors[$data['status']] ?? 'bg-gray-100 text-gray-800';
                         ?>
-                        <span class="inline-block px-4 py-2 rounded-full text-sm font-bold <?= $status_class ?>">
+                        <span class="inline-block px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold <?= $status_class ?>">
                             <?= ucfirst(htmlspecialchars($data['status'])) ?>
                         </span>
                     </div>
                 </div>
 
                 <!-- Feedback Section -->
-                <div class="mt-8 bg-white p-6 rounded-lg border border-[#a4c6c3] shadow-sm">
-                    <div class="flex items-center gap-3 mb-6 pb-3 border-b border-gray-200">
-                        <i class="fa-solid fa-comments text-[#42506a] text-lg"></i>
-                        <h4 class="text-lg font-bold text-[#0b1110] uppercase tracking-wide">Feedback dari Admin</h4>
+                <div class="mt-6 sm:mt-8 bg-white p-4 sm:p-6 rounded-lg border border-[#a4c6c3] shadow-sm">
+                    <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 pb-2 sm:pb-3 border-b border-gray-200">
+                        <i class="fa-solid fa-comments text-[#42506a] text-base sm:text-lg"></i>
+                        <h4 class="text-base sm:text-lg font-bold text-[#0b1110] uppercase tracking-wide">Feedback dari Admin</h4>
                     </div>
 
                     <?php if (!empty($feedback_list)): ?>
-                        <div class="space-y-4">
+                        <div class="space-y-3 sm:space-y-4">
                             <?php foreach ($feedback_list as $fb): ?>
-                                <div class="bg-[#f5f5f5] p-4 rounded-lg border-l-4 border-[#42506a]">
+                                <div class="bg-[#f5f5f5] p-3 sm:p-4 rounded-lg border-l-4 border-[#42506a]">
                                     <p class="text-gray-700 text-sm leading-relaxed"><?= nl2br(htmlspecialchars($fb['pesan'])) ?></p>
                                     <p class="text-gray-500 text-xs mt-2">
                                         <i class="fa-solid fa-clock mr-1"></i>
@@ -189,7 +189,7 @@
                             <?php endforeach; ?>
                         </div>
                     <?php else: ?>
-                        <div class="bg-[#f5f5f5] p-4 rounded-lg border-l-4 border-gray-300">
+                        <div class="bg-[#f5f5f5] p-3 sm:p-4 rounded-lg border-l-4 border-gray-300">
                             <p class="text-gray-500 text-sm">
                                 <i class="fa-solid fa-circle-info mr-2"></i>Belum ada feedback dari admin
                             </p>
@@ -200,9 +200,9 @@
             </div>
 
             <!-- Footer Card -->
-            <div class="bg-gray-50 px-8 py-6 border-t border-gray-200">
+            <div class="bg-gray-50 px-4 sm:px-6 md:px-8 py-4 sm:py-6 border-t border-gray-200">
                 <a href="data-pengaduan.php"
-                   class="inline-flex items-center gap-2 px-6 py-3 bg-[#42506a] text-white rounded-lg
+                   class="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-[#42506a] text-white rounded-lg text-sm sm:text-base
                           hover:bg-[#0b1110] transition duration-300 shadow-md font-semibold">
                     <i class="fa-solid fa-arrow-left"></i>
                     <span>Kembali ke Daftar Pengaduan</span>

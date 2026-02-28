@@ -12,6 +12,26 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <style>
+        .sidebar-toggle {
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-open {
+            transform: translateX(0);
+        }
+        
+        .sidebar-closed {
+            transform: translateX(-100%);
+        }
+        
+        @media (min-width: 768px) {
+            .sidebar-closed {
+                transform: translateX(0);
+            }
+        }
+    </style>
+
     <?php
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -46,8 +66,20 @@
 
     <div class="flex min-h-screen">
 
+        <!-- ================= HAMBURGER BUTTON (Mobile) ================= -->
+        <button id="hamburger-btn" class="fixed top-4 left-4 z-50 md:hidden bg-[#42506a] text-white p-2 rounded-lg hover:bg-[#0b1110] transition"
+            onclick="toggleSidebar()">
+            <i id="hamburger-icon" class="fa-solid fa-bars text-lg"></i>
+        </button>
+
         <!-- ================= SIDEBAR ================= -->
-        <div class="w-full md:w-64 bg-[#ebf3f2] min-h-screen p-4 md:p-6 flex flex-col justify-between shadow-lg md:shadow-lg sticky top-0 md:static">
+        <div id="sidebar" class="sidebar-toggle sidebar-closed fixed md:static md:sidebar-open w-full md:w-64 bg-[#ebf3f2] min-h-screen p-4 md:p-6 flex flex-col justify-between shadow-lg z-40 top-0 left-0 h-screen md:h-auto transition-transform">
+            
+            <!-- Close button untuk mobile -->
+            <button id="close-btn" class="md:hidden absolute top-4 right-4 text-[#0b1110] hover:text-[#42506a] transition"
+                onclick="toggleSidebar()">
+                <i class="fa-solid fa-times text-2xl"></i>
+            </button>
 
             <div>
                 <!-- Logo Area -->
@@ -161,7 +193,8 @@
                 <hr class="mb-4 border-[#a4c6c3]">
                 <a href="<?= $base_path ?>logout.php"
                     class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-semibold text-sm
-                      bg-[#42506a] text-white hover:bg-[#0b1110] transition">
+                      bg-[#42506a] text-white hover:bg-[#0b1110] transition"
+                    onclick="closeSidebar()">
                     <i class="fa-solid fa-right-from-bracket flex-shrink-0"></i>
                     <span class="hidden md:inline">LOG OUT</span>
                     <span class="md:hidden">Exit</span>
@@ -171,8 +204,69 @@
         </div>
         <!-- =========================================== -->
 
+        <!-- ================= OVERLAY (Mobile) ================= -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden hidden"
+            onclick="toggleSidebar()"></div>
+        <!-- =========================================== -->
 
     </div>
+
+    <!-- JavaScript untuk Hamburger Menu -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            
+            sidebar.classList.toggle('sidebar-open');
+            sidebar.classList.toggle('sidebar-closed');
+            overlay.classList.toggle('hidden');
+            
+            // Toggle icon (bars ↔ times)
+            if (hamburgerIcon.classList.contains('fa-bars')) {
+                hamburgerIcon.classList.remove('fa-bars');
+                hamburgerIcon.classList.add('fa-times');
+            } else {
+                hamburgerIcon.classList.remove('fa-times');
+                hamburgerIcon.classList.add('fa-bars');
+            }
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            
+            // Hanya close di mobile
+            if (window.innerWidth < 768) {
+                sidebar.classList.remove('sidebar-open');
+                sidebar.classList.add('sidebar-closed');
+                overlay.classList.add('hidden');
+                
+                if (hamburgerIcon.classList.contains('fa-times')) {
+                    hamburgerIcon.classList.remove('fa-times');
+                    hamburgerIcon.classList.add('fa-bars');
+                }
+            }
+        }
+
+        // Close sidebar saat resize ke desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.remove('sidebar-closed');
+                const overlay = document.getElementById('sidebar-overlay');
+                overlay.classList.add('hidden');
+            }
+        });
+
+        // Close sidebar saat klik menu link di mobile
+        document.querySelectorAll('#sidebar a').forEach(link => {
+            link.addEventListener('click', function() {
+                closeSidebar();
+            });
+        });
+    </script>
 
 </body>
 
