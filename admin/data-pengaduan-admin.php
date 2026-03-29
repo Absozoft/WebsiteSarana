@@ -69,7 +69,7 @@
         <div class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 text-white">
 
             <h2 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
-                Data Pengaduan Saya
+                Data Pengaduan Siswa
             </h2>
 
             <!-- ================= SEARCH BOX ================= -->
