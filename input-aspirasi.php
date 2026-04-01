@@ -71,14 +71,6 @@
                         </select>
                     </div>
 
-                    <!-- Foto -->
-                    <div>
-                        <label class="block mb-2 font-semibold text-sm sm:text-base">Foto (URL atau Nama File)</label>
-                        <input type="text" name="foto"
-                            class="w-full p-2 sm:p-3 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#42506a]"
-                            placeholder="Masukkan nama file foto">
-                    </div>
-
                     <!-- Button -->
                     <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2">
                         <button type="submit"
